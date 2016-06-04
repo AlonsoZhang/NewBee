@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabBarController: RAMAnimatedTabBarController {
     
-    private var fristLoad: Bool = false
+    private var fristLoadMainTabBarController: Bool = false
     
     // MARK:- view life circle
     override func viewDidLoad() {
@@ -21,17 +21,18 @@ class MainTabBarController: RAMAnimatedTabBarController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //判断初次登录
-        if fristLoad == false {
+        
+        if fristLoadMainTabBarController == false {
             let containers = createViewContainers()
             
             createCustomIcons(containers)
-            fristLoad = true
+            fristLoadMainTabBarController = true
         }
     }
     
     override func addChildViewController(childController: UIViewController) {
         super.addChildViewController(childController)
+        
     }
     
     // MARK: 初始化tabbar
@@ -52,5 +53,4 @@ class MainTabBarController: RAMAnimatedTabBarController {
         navigationVC.navigationBar.backgroundColor = UIColor.redColor()
         addChildViewController(navigationVC)
     }
-
 }
