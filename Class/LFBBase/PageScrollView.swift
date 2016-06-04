@@ -15,6 +15,7 @@ class PageScrollView: UIView {
     private var pageControl: UIPageControl!
     private var timer: NSTimer?
     private var placeholderImage: UIImage?
+    private var imageClick:((index: Int) -> ())?
     
     var imageURLSting: [String]? {
         //属性观察者，类似于触发器。不仅可以在属性值改变后触发didSet，也可以在属性值改变前触发willSet。
@@ -37,9 +38,11 @@ class PageScrollView: UIView {
         
     }
     
-    convenience init(frame: CGRect, placeholder: UIImage) {
+    //convenience init(frame: CGRect, placeholder: UIImage) {
+    convenience init(frame: CGRect, placeholder: UIImage, focusImageViewClick:((index: Int) -> Void)) {
         self.init(frame: frame)
         placeholderImage = placeholder
+        imageClick = focusImageViewClick
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,7 +119,7 @@ class PageScrollView: UIView {
     }
     // MARK: Timer
     private func startTimer() {
-        timer = NSTimer(timeInterval: 2.0, target: self, selector: "next", userInfo: nil, repeats: true)
+        timer = NSTimer(timeInterval: 3.0, target: self, selector: "next", userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSRunLoopCommonModes)
     }
     
@@ -131,7 +134,10 @@ class PageScrollView: UIView {
     
     // MARK: ACTION
     func imageViewClick(tap: UITapGestureRecognizer) {
-        print(tap.view!.tag)
+        //print(tap.view!.tag)
+        if imageClick != nil {
+            imageClick!(index: tap.view!.tag)
+        }
     }
     
 }
