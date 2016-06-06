@@ -64,7 +64,7 @@ class HomeTableHeadView: UIView {
                 tmpSelf!.delegate!.tableHeadView!(tmpSelf!, focusImageViewClick: index)
             }
         })
-        hotView?.backgroundColor = UIColor.yellowColor()
+        hotView?.backgroundColor = UIColor.whiteColor()
         addSubview(hotView!)
     }
     
