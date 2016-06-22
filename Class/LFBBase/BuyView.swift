@@ -14,7 +14,7 @@ class BuyView: UIView {
     private lazy var addGoodsButton: UIButton = {
         let addGoodsButton = UIButton(type: .Custom)
         addGoodsButton.setImage(UIImage(named: "v2_increase"), forState: .Normal)
-        addGoodsButton.addTarget(self, action: "addGoodsButtonClick", forControlEvents: .TouchUpInside)
+        addGoodsButton.addTarget(self, action: #selector(BuyView.addGoodsButtonClick), forControlEvents: .TouchUpInside)
         return addGoodsButton
     }()
     
@@ -22,7 +22,7 @@ class BuyView: UIView {
     private lazy var reduceGoodsButton: UIButton = {
         let reduceGoodsButton = UIButton(type: .Custom)
         reduceGoodsButton.setImage(UIImage(named: "v2_reduce")!, forState: .Normal)
-        reduceGoodsButton.addTarget(self, action: "reduceGoodsButtonClick", forControlEvents: .TouchUpInside)
+        reduceGoodsButton.addTarget(self, action: #selector(BuyView.reduceGoodsButtonClick), forControlEvents: .TouchUpInside)
         reduceGoodsButton.hidden = true
         return reduceGoodsButton
     }()
@@ -129,7 +129,7 @@ class BuyView: UIView {
         }
         
         reduceGoodsButton.hidden = false
-        buyNumber++
+        buyNumber += 1
         goods?.userBuyNumber = buyNumber
         buyCountLabel.text = "\(buyNumber)"
         buyCountLabel.hidden = false
@@ -140,7 +140,7 @@ class BuyView: UIView {
             return
         }
         
-        buyNumber--
+        buyNumber -= 1
         goods?.userBuyNumber = buyNumber
         if buyNumber == 0 {
             reduceGoodsButton.hidden = true

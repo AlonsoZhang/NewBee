@@ -219,6 +219,8 @@ public class DictModelManager {
         
         // 检查类是否实现了协议
         var mappingDict: [String: String]?
+        //print("\(cls.respondsToSelector("customClassMapping"))")
+        
         if cls.respondsToSelector("customClassMapping") {
             mappingDict = cls.customClassMapping()
         }

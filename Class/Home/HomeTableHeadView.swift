@@ -49,7 +49,7 @@ class HomeTableHeadView: UIView {
     func buildPageScrollView() {
         weak var tmpSelf = self
         pageScrollView = PageScrollView(frame: CGRectZero, placeholder: UIImage(named: "v2_placeholder_full_size")!, focusImageViewClick: { (index) -> Void in
-            if tmpSelf!.delegate != nil && ((tmpSelf!.delegate?.respondsToSelector("tableHeadView:focusImageViewClick:")) != nil) {
+            if tmpSelf!.delegate != nil && ((tmpSelf!.delegate?.respondsToSelector(#selector(HomeTableHeadViewDelegate.tableHeadView(_:focusImageViewClick:)))) != nil) {
                 tmpSelf!.delegate!.tableHeadView!(tmpSelf!, focusImageViewClick: index)
             }
         })
@@ -60,7 +60,7 @@ class HomeTableHeadView: UIView {
     func buildHotView() {
         weak var tmpSelf = self
         hotView = HotView(frame: CGRectZero, iconClick: { (index) -> Void in
-            if tmpSelf!.delegate != nil && ((tmpSelf!.delegate?.respondsToSelector("tableHeadView:iconClick")) != nil) {
+            if tmpSelf!.delegate != nil && ((tmpSelf!.delegate?.respondsToSelector(#selector(HomeTableHeadViewDelegate.tableHeadView(_:iconClick:)))) != nil) {
                 tmpSelf!.delegate!.tableHeadView!(tmpSelf!, focusImageViewClick: index)
             }
         })

@@ -70,14 +70,14 @@ class PageScrollView: UIView {
     }
     //MARK: 更新内容
     private func updatePageScrollView() {
-        for var i = 0; i < imageScrollView.subviews.count; i++ {
+        for i in 0 ..< imageScrollView.subviews.count {
             let imageView = imageScrollView.subviews[i] as! UIImageView
             var index = pageControl.currentPage
             
             if i == 0 {
-                index--
+                index -= 1
             } else if 2 == i {
-                index++
+                index += 1
             }
             
             if index < 0 {
@@ -104,7 +104,7 @@ class PageScrollView: UIView {
         
         for _ in 0..<3 {
             let imageView = UIImageView()
-            let tap = UITapGestureRecognizer(target: self, action: "imageViewClick:")
+            let tap = UITapGestureRecognizer(target: self, action: #selector(PageScrollView.imageViewClick(_:)))
             imageView.addGestureRecognizer(tap)
             imageScrollView.addSubview(imageView)
         }
@@ -119,7 +119,7 @@ class PageScrollView: UIView {
     }
     // MARK: Timer
     private func startTimer() {
-        timer = NSTimer(timeInterval: 3.0, target: self, selector: "next", userInfo: nil, repeats: true)
+        timer = NSTimer(timeInterval: 3.0, target: self, selector: #selector(PageScrollView.next), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSRunLoopCommonModes)
     }
     

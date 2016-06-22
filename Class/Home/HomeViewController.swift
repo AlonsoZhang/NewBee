@@ -37,8 +37,8 @@ class HomeViewController: BaseViewController {
     
     // MARK:- addNotifiation
     func addHomeNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "homeTableHeadViewHeightDidChange:", name: HomeTableHeadViewHeightDidChange, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goodsInventoryProblem:", name: GoodsInventoryProblem, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.homeTableHeadViewHeightDidChange(_:)), name: HomeTableHeadViewHeightDidChange, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.goodsInventoryProblem(_:)), name: GoodsInventoryProblem, object: nil)
     }
     
     // MARK:- Creat UI
@@ -47,10 +47,10 @@ class HomeViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem.barButton("扫一扫", titleColor: UIColor.blackColor(),
             image: UIImage(named: "icon_black_scancode")!, hightLightImage: nil,
-            target: self, action: "leftItemClick", type: ItemButtonType.Left)
+            target: self, action: #selector(HomeViewController.leftItemClick), type: ItemButtonType.Left)
         navigationItem.rightBarButtonItem = UIBarButtonItem.barButton("搜 索", titleColor: UIColor.blackColor(),
             image: UIImage(named: "icon_search")!,hightLightImage: nil,
-            target: self, action: "rightItemClick", type: ItemButtonType.Right)
+            target: self, action: #selector(HomeViewController.rightItemClick), type: ItemButtonType.Right)
     }
     
     private func buildTableHeadView() {
@@ -228,14 +228,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             footerView.hideLabel()
             footerView.tag = 1
         }
-        let tap = UITapGestureRecognizer(target: self, action: "moreGoodsClick:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.moreGoodsClick(_:)))
         footerView.addGestureRecognizer(tap)
         
         return footerView
     }
     
     // MARK: 查看更多商品被点击
-    func moreGoodsClickik(tap: UITapGestureRecognizer) {
+    func moreGoodsClick(tap: UITapGestureRecognizer) {
         if tap.view?.tag == 100 {
             let tabBarController = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainTabBarController
             tabBarController.setSelectIndex(from: 0, to: 1)
